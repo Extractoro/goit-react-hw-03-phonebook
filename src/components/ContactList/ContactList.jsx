@@ -1,39 +1,34 @@
-import PropTypes from 'prop-types'
-import s from './ContactList.module.css'
+import PropTypes from 'prop-types';
+import ContactItem from './ContactItem';
+import s from './ContactList.module.css';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
-    return (
-      <>
-        <p>Total contacts: {contacts.length}</p>
-        <ul className={s['list']}>
-          {contacts.map(({ id, name, number }) => (
-            <li key={id} id={id} className={s['item']}>
-              <button
-                onClick={() => onDeleteContact(id)}
-                className={s['button']}
-                type='Submit'>
-                x
-              </button>
-              <div className={s['wrapper']}>
-                <p className={s['text']}>{name}:</p>
-                <p className={s['number']}>{number}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </>
-    )
-}
+  return (
+    <>
+      <p>Total contacts: {contacts.length}</p>
+      <ul className={s['list']}>
+        {contacts.map(({ id, name, number }) => (
+          <ContactItem
+            key={id}
+            name={name}
+            number={number}
+            id={id}
+            onDeleteContact={onDeleteContact}
+          />
+        ))}
+      </ul>
+    </>
+  );
+};
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired, 
-      name: PropTypes.string.isRequired, 
-      number: PropTypes.string.isRequired
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
-    
-  )
-}
+  ),
+};
 
-export default ContactList
+export default ContactList;
